@@ -1,5 +1,14 @@
 
 
+To use:
+- cp config/settings.sh.sample config/settings.sh
+- Edit config/settings.sh
+- Make backup of prestashop images
+- Put on pub/media/import/ magento folder
+- Execute script migrate-prestashop-magento.sh
+- Import products from generated csv on Magento2
+- Import products images from generated csv on Magento2
+- Import categories from generated csv on Magento2
 
 
 Requirements
