@@ -113,7 +113,10 @@ INTO OUTFILE 'produtos.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERM
 	FRESULT+=/$TABLE
 	FRESULT+='.txt'
 
+
+
 # IMAGES
+# trabalhar nisso
 #  	find . -regextype posix-awk -iregex '.*[0-9]+.jpg$|.*[0-9]+-small_default.jpg$' -exec cp -f {} images/ \;
 #find . -regextype posix-awk -iregex '.*[0-9]+.jpg$|.*[0-9]+-small_default.jpg$|.*[0-9]+-cart_default.jpg$' -exec cp -f {} images/ \;
 
