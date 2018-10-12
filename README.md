@@ -17,3 +17,6 @@ Note:
 
 TODO
 - Add export images to the script
+- Improve categories export (order, products with multiples categories)
+- Improve import of product attributes
+- Add import promotion atribute
