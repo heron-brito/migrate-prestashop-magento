@@ -3,11 +3,12 @@
 
 source config/settings.sh
 
-rm -Rf $OUTDIR
-mkdir $OUTDIR
 rm -Rf $TEMPDIR
 mkdir $TEMPDIR
-mkdir $EXPORTDIR
+
+if [ ! -d $EXPORTDIR ]; then
+    mkdir $EXPORTDIR
+fi
 
 
 source inc/initial_commands.sh
@@ -27,7 +28,7 @@ source inc/initial_commands.sh
 	#(1)creates empty file and sets up column names using the information_schema
 	# Heron query to dump e nao para CSV
 	#"SELECT COLUMN_NAME FROM information_schema.COLUMNS C WHERE ( table_name = '$TABLE' OR table_name = '$TABLE_LANG') AND TABLE_SCHEMA = '$DBNAME' ;" \
-	#mysql -u root -panimalize09  $DBNAME -B -e \
+	#mysql -u root -p$DBPASS  $DBNAME -B -e \
 	#"SELECT COLUMN_NAME FROM information_schema.COLUMNS C WHERE  table_name = '$TABLE'  AND TABLE_SCHEMA = '$DBNAME' ;" \
 	#| awk '{print $1}' \
 	#| grep -iv ^COLUMN_NAME$ | sed 's/^/"/g;s/$/"/g' | tr '\n' ';' > $FNAME
@@ -39,8 +40,8 @@ source inc/initial_commands.sh
 
 	# Heron query only to dump e nao para CSV
 
-      	#mysqldump -h localhost -uroot -panimalize09 $DBNAME --fields-enclosed-by=\" --fields-terminated-by=\; $TABLE -T$OUTDIR             
-      	#mysqldump -h localhost -uroot -panimalize09 $DBNAME --fields-enclosed-by=\" --fields-terminated-by=\; $TABLE -T$OUTDIR -e "
+      	#mysqldump -h localhost -uroot -p$DBPASS $DBNAME --fields-enclosed-by=\" --fields-terminated-by=\; $TABLE -T$OUTDIR             
+      	#mysqldump -h localhost -uroot -p$DBPASS $DBNAME --fields-enclosed-by=\" --fields-terminated-by=\; $TABLE -T$OUTDIR -e "
 
 
 	rm -f $DBPATH/pscloneoriginal02/produtos.csv	
@@ -61,7 +62,7 @@ source inc/initial_commands.sh
 		#,'Default Category/Cloro'
 		#,CONCAT('Default Category/',xpto)
 		#, 'Catalog, Search'
-      	mysql -h localhost -uroot -panimalize09 $DBNAME -B -e "
+      	mysql -h localhost -uroot -p$DBPASS $DBNAME -B -e "
 	SELECT 
 		IF(reference like '' ,CONCAT('POOL.000',p.id_product), reference) as sku 
 		,''
@@ -136,7 +137,7 @@ INTO OUTFILE 'produtos.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERM
 	    #, CONCAT(CONCAT('images/',i.id_image),'-cart_default.jpg')
 	    #, il.legend
 
-      	mysql -h localhost -uroot -panimalize09 $DBNAME -B -e "
+      	mysql -h localhost -uroot -p$DBPASS $DBNAME -B -e "
 	SELECT
 	    IF(reference like '' ,CONCAT('POOL.000',p.id_product), reference) as sku
 	    , CONCAT(CONCAT('images/',i.id_image),'.jpg')
@@ -168,7 +169,7 @@ AND p.reference!='Linha Mestra Slim'
 
 # Testado
 
-       mysql -h localhost -uroot -panimalize09 $DBNAME -B -e "
+       mysql -h localhost -uroot -p$DBPASS $DBNAME -B -e "
 	SELECT DISTINCT email,'base','admin','',c.date_add,'Admin',''
         ,IF(c.birthday IS NULL,'', c.birthday )
 	,c.firstname
