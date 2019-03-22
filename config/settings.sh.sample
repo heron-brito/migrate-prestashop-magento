@@ -4,7 +4,7 @@ DBUSER=prestashop
 DBPASS=prestashop
 DBPATH=/var/lib/mysql
 EXPORTDIR=export
-EXPORTZIPDIR=/home/heron
+EXPORTZIPDIR=/exportzip/
 TEMPDIR=tmp
 
 
