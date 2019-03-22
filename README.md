@@ -19,6 +19,10 @@ Requirements
    find . -regextype posix-awk -iregex '.*[0-9]+.jpg$|.*[0-9]+-small_default.jpg$|.*[0-9]+-cart_default.jpg$' -exec cp -f {} images/ \;
 
 
+- cd img/p
+- find . -regextype posix-awk -iregex '.[0-9/]+.jpg$|.[0-9/]+-small_default.jpg$' -exec cp -f {} images/ \;
+- find . -regextype posix-awk -iregex '.[0-9/]+.jpg$|.[0-9/]+-small_default.jpg$|.*[0-9/]+-cart_default.jpg$' -exec cp -f {} images/ \;
+
 
 Note:
 - This script delete $TEMPDIR during the execution
